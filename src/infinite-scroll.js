@@ -10,7 +10,7 @@ module.exports = function({
   }
 
   function handleScroll(scroller, event) {
-    if (scroller.updateInitiated) {
+    if (scroller.isUpdating) {
       return;
     }
 
@@ -26,10 +26,10 @@ module.exports = function({
 
     // Check if scroll bar position is just 50px above the max, if yes, initiate an update
     if (pageHeight - (scrollPos + clientHeight) < scroller.options.distance) {
-      scroller.updateInitiated = true;
+      scroller.isUpdating = true;
 
       scroller.callback(() => {
-        scroller.updateInitiated = false;
+        scroller.isUpdating = false;
       });
     }
 
@@ -40,7 +40,7 @@ module.exports = function({
     const scroller = {
       callback,
       options: { distance },
-      updateInitiated: false
+      isUpdating: false
     };
 
     window.onscroll = (event) => {
