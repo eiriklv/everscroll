@@ -1,6 +1,6 @@
 {
   "name": "everscroll",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Infinite scroll",
   "main": "./dist/infinite-scroll.js",
   "scripts": {
