@@ -26,13 +26,15 @@ module.exports = function (_ref) {
     // Find the pageHeight and clientHeight(the no. of pixels to scroll to make the scrollbar reach max pos)
     var pageHeight = document.documentElement.scrollHeight;
     var clientHeight = document.documentElement.clientHeight;
+    var distanceToBottom = pageHeight - (scrollPos + clientHeight);
 
     // Check if scroll bar position is just 50px above the max, if yes, initiate an update
-    if (pageHeight - (scrollPos + clientHeight) < scroller.options.distance) {
+    if (distanceToBottom < scroller.options.distance) {
       scroller.isUpdating = true;
 
       scroller.callback(function () {
         scroller.isUpdating = false;
+        handleScroll(scroller, event);
       });
     }
 
@@ -53,5 +55,7 @@ module.exports = function (_ref) {
     document.ontouchmove = function (event) {
       handleScroll(scroller, event);
     };
+
+    handleScroll(scroller, event);
   };
 };
