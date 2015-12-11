@@ -2,7 +2,7 @@ module.exports = function({
   distance = 50
 }) {
   function getScrollPos(){
-    let yScroll;
+    let yScroll = 0;
     
     if (self.pageYOffset) {
         yScroll = self.pageYOffset;
