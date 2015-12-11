@@ -1,13 +1,19 @@
-'use strict';
+"use strict";
 
 module.exports = function (_ref) {
   var _ref$distance = _ref.distance;
   var distance = _ref$distance === undefined ? 50 : _ref$distance;
 
-  var isIE = navigator.appName === 'Microsoft Internet Explorer';
-
   function getScrollPos() {
-    return isIE ? document.documentElement.scrollTop : window.pageYOffset;
+    var yScroll;
+    if (self.pageYOffset) {
+      yScroll = self.pageYOffset;
+    } else if (document.documentElement && document.documentElement.scrollTop) {
+      yScroll = document.documentElement.scrollTop;
+    } else if (document.body) {
+      yScroll = document.body.scrollTop;
+    }
+    return yScroll;
   }
 
   function handleScroll(scroller, event) {

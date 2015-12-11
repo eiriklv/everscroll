@@ -1,6 +1,8 @@
 Everscroll
 ----------
 
+[![npm version](https://badge.fury.io/js/everscroll.svg)](http://badge.fury.io/js/everscroll)
+
 Really simple infinite scroll library
 
 Thanks to: https://github.com/alexblack/infinite-scroll
