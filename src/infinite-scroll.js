@@ -1,6 +1,8 @@
 module.exports = function({
   distance = 50
 }) {
+  const isIE = navigator.appName === 'Microsoft Internet Explorer';
+
   let prevScrollPos = getScrollPos();
 
   function getScrollPos() {
