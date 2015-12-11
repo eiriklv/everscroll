@@ -1,8 +1,10 @@
-"use strict";
+'use strict';
 
 module.exports = function (_ref) {
   var _ref$distance = _ref.distance;
   var distance = _ref$distance === undefined ? 50 : _ref$distance;
+
+  var isIE = navigator.appName === 'Microsoft Internet Explorer';
 
   var prevScrollPos = getScrollPos();
 
