@@ -2,7 +2,8 @@ module.exports = function({
   distance = 50
 }) {
   function getScrollPos(){
-    var yScroll;
+    let yScroll;
+    
     if (self.pageYOffset) {
         yScroll = self.pageYOffset;
     } else if (document.documentElement && document.documentElement.scrollTop) {
@@ -10,7 +11,8 @@ module.exports = function({
     } else if (document.body) {
         yScroll = document.body.scrollTop;
     }
-   return yScroll;
+    
+    return yScroll;
   }
 
   function handleScroll(scroller, event) {
