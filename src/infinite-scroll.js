@@ -1,12 +1,16 @@
 module.exports = function({
   distance = 50
 }) {
-  const isIE = navigator.appName === 'Microsoft Internet Explorer';
-
-  function getScrollPos() {
-    return isIE ?
-      document.documentElement.scrollTop :
-      window.pageYOffset;
+  function getScrollPos(){
+    var yScroll;
+    if (self.pageYOffset) {
+        yScroll = self.pageYOffset;
+    } else if (document.documentElement && document.documentElement.scrollTop) {
+        yScroll = document.documentElement.scrollTop;
+    } else if (document.body) {
+        yScroll = document.body.scrollTop;
+    }
+   return yScroll;
   }
 
   function handleScroll(scroller, event) {
