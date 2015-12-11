@@ -6,30 +6,23 @@ module.exports = function (_ref) {
 
   var isIE = navigator.appName === 'Microsoft Internet Explorer';
 
-  var prevScrollPos = getScrollPos();
-
   function getScrollPos() {
     return isIE ? document.documentElement.scrollTop : window.pageYOffset;
   }
 
   function handleScroll(scroller, event) {
-    if (scroller.isUpdating) {
-      return;
-    }
-
+    // find some relevant values
     var scrollPos = getScrollPos();
-
-    if (scrollPos == prevScrollPos) {
-      return; // nothing to do
-    }
-
-    // Find the pageHeight and clientHeight(the no. of pixels to scroll to make the scrollbar reach max pos)
     var pageHeight = document.documentElement.scrollHeight;
     var clientHeight = document.documentElement.clientHeight;
     var distanceToBottom = pageHeight - (scrollPos + clientHeight);
 
-    // Check if scroll bar position is just 50px above the max, if yes, initiate an update
+    // check if we are within the max distance to the bottom
     if (distanceToBottom < scroller.options.distance) {
+      if (scroller.isUpdating) {
+        return;
+      }
+
       scroller.isUpdating = true;
 
       scroller.callback(function () {
@@ -37,8 +30,6 @@ module.exports = function (_ref) {
         handleScroll(scroller, event);
       });
     }
-
-    prevScrollPos = scrollPos;
   }
 
   return function infiniteScroll(callback) {
