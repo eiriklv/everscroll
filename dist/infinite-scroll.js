@@ -5,14 +5,16 @@ module.exports = function (_ref) {
   var distance = _ref$distance === undefined ? 50 : _ref$distance;
 
   function getScrollPos() {
-    var yScroll;
+    var yScroll = 0;
+
     if (self.pageYOffset) {
       yScroll = self.pageYOffset;
-    } else if (document.documentElement && document.documentElement.scrollTop) {
+    } else if ((document.documentElement || {}).scrollTop) {
       yScroll = document.documentElement.scrollTop;
     } else if (document.body) {
       yScroll = document.body.scrollTop;
     }
+
     return yScroll;
   }
 
