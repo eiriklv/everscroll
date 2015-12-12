@@ -1,9 +1,10 @@
 module.exports = function({
-  distance = 50
+  distance = 50,
+  disableCallback = false
 }) {
   function getScrollPos(){
     let yScroll = 0;
-    
+
     if (self.pageYOffset) {
         yScroll = self.pageYOffset;
     } else if ((document.documentElement || {}).scrollTop) {
@@ -11,7 +12,7 @@ module.exports = function({
     } else if (document.body) {
         yScroll = document.body.scrollTop;
     }
-    
+
     return yScroll;
   }
 
@@ -24,15 +25,18 @@ module.exports = function({
 
     // check if we are within the max distance to the bottom
     if (distanceToBottom < scroller.options.distance) {
-      if (scroller.isUpdating) {
+      if (!disableCallback && scroller.isUpdating) {
         return;
       }
 
-      scroller.isUpdating = true;
+      if (!disableCallback) {
+        scroller.isUpdating = true;
+      }
 
       scroller.callback(() => {
-        scroller.isUpdating = false;
-        handleScroll(scroller, event);
+        if (!disableCallback) {
+          scroller.isUpdating = false;
+        }
       });
     }
   }
@@ -47,11 +51,9 @@ module.exports = function({
     window.onscroll = (event) => {
       handleScroll(scroller, event);
     };
-    // For touch devices, try to detect scrolling by touching
+
     document.ontouchmove = (event) => {
       handleScroll(scroller, event);
     };
-
-    handleScroll(scroller, event);
   };
 };
