@@ -7,27 +7,23 @@ module.exports = function (_ref) {
   var disableCallback = _ref$disableCallback === undefined ? false : _ref$disableCallback;
 
   function getScrollPos() {
-    var yScroll = 0;
-
     if (self.pageYOffset) {
-      yScroll = self.pageYOffset;
+      return self.pageYOffset;
     } else if ((document.documentElement || {}).scrollTop) {
-      yScroll = document.documentElement.scrollTop;
+      return document.documentElement.scrollTop;
     } else if (document.body) {
-      yScroll = document.body.scrollTop;
+      return document.body.scrollTop;
+    } else {
+      return 0;
     }
-
-    return yScroll;
   }
 
   function handleScroll(scroller, event) {
-    // find some relevant values
     var scrollPos = getScrollPos();
     var pageHeight = document.documentElement.scrollHeight;
     var clientHeight = document.documentElement.clientHeight;
     var distanceToBottom = pageHeight - (scrollPos + clientHeight);
 
-    // check if we are within the max distance to the bottom
     if (distanceToBottom < scroller.options.distance) {
       if (!disableCallback && scroller.isUpdating) {
         return;
