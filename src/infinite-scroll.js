@@ -44,6 +44,8 @@ module.exports = function({
       isUpdating: false
     };
 
+    handleScroll(scroller);
+
     window.onscroll = (event) => {
       handleScroll(scroller, event);
     };

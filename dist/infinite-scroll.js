@@ -1,10 +1,10 @@
 "use strict";
 
 module.exports = function (_ref) {
-  var _ref$distance = _ref.distance;
-  var distance = _ref$distance === undefined ? 50 : _ref$distance;
-  var _ref$disableCallback = _ref.disableCallback;
-  var disableCallback = _ref$disableCallback === undefined ? false : _ref$disableCallback;
+  var _ref$distance = _ref.distance,
+      distance = _ref$distance === undefined ? 50 : _ref$distance,
+      _ref$disableCallback = _ref.disableCallback,
+      disableCallback = _ref$disableCallback === undefined ? false : _ref$disableCallback;
 
   function getScrollPos() {
     if (self.pageYOffset) {
@@ -47,6 +47,8 @@ module.exports = function (_ref) {
       options: { distance: distance },
       isUpdating: false
     };
+
+    handleScroll(scroller);
 
     window.onscroll = function (event) {
       handleScroll(scroller, event);
